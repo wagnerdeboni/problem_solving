@@ -1,5 +1,4 @@
-from tui import display_title, display_menu, get_choice
-
+from tui import show_title, show_menu, user_choice
 from process import (
     read_reviews,
     reviews_per_park,
@@ -8,24 +7,25 @@ from process import (
 
 def main():
 
-    # title
-    display_title()
+    #title
+    show_title()
 
-    # rev file
-    reviews = read_reviews("disneyland_reviews.csv")
+    #rev file
+    reviews = read_reviews("data/disneyland_reviews.csv")
 
     print("\nData loaded successfully")
     print("Number of reviews:", len(reviews))
 
+    #running until user exits
     while True:
 
-        # menu
-        display_menu()
+        #menu
+        show_menu()
 
-        # op user
-        option = get_choice()
+        #option user
+        option = user_choice()
 
-        # op A
+        #op A
         if option == "A":
 
             print("\nParks with most reviews:\n")
@@ -35,13 +35,14 @@ def main():
             for park in park_info:
                 print(park, "-", park_info[park], "reviews")
 
-        # op B
+        #op B
         elif option == "B":
 
             park = input("\nType the park name: ")
 
             location_info = reviews_by_country(reviews, park)
 
+            #check if results exist
             if len(location_info) == 0:
                 print("No reviews found.")
 
@@ -51,17 +52,16 @@ def main():
                 for country in location_info:
                     print(country, "-", location_info[country], "reviews")
 
-        # exit
+        #exit
         elif option == "X":
 
             print("Program closed.")
             break
 
-        # invalid op
+        #wrong op
         else:
             print("Please enter a valid option.")
 
 
-# run
-# march update
-main()
+#run
+main ()

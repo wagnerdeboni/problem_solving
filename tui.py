@@ -1,3 +1,4 @@
+```python
 def display_title():
 
     text = "Disneyland Reviews System"
@@ -20,7 +21,8 @@ def get_choice():
 
     choice = input("Select an option: ")
 
-    # Remove spaces and convert to uppercase
+    # Remove spaces and change to capital letters
     choice = choice.strip().upper()
 
     return choice
+```
