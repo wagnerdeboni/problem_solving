@@ -1,4 +1,4 @@
-def load_reviews(file_path):
+def read_reviews(file_path):
     reviews = []
 
     file = open(file_path, "r", encoding="utf-8")
@@ -21,7 +21,7 @@ def load_reviews(file_path):
     return reviews
 
 
-def get_review_count_per_park(reviews):
+def reviews_per_park(reviews):
     total_by_park = {}
 
     for review in reviews:
@@ -35,7 +35,7 @@ def get_review_count_per_park(reviews):
     return total_by_park
 
 
-def count_reviews_by_location_for_park(reviews, park_name):
+def reviews_by_country(reviews, park_name):
     total_by_location = {}
 
     park_name = park_name.strip().lower().replace(" ", "_")
@@ -52,3 +52,7 @@ def count_reviews_by_location_for_park(reviews, park_name):
                 total_by_location[location] += 1
 
     return total_by_location
+
+# april update
+# nmay update
+# june update
