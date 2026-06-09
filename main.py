@@ -6,6 +6,12 @@ from process import (
     reviews_by_country
 )
 
+from visual import (
+    reviews_per_park_chart,
+    reviews_by_country_chart
+)
+
+
 def main():
 
     # title
@@ -22,10 +28,10 @@ def main():
         # menu
         display_menu()
 
-        # op user
+        # op_user
         option = get_choice()
 
-        # op A
+        # op_A
         if option == "A":
 
             print("\nParks with most reviews:\n")
@@ -35,7 +41,10 @@ def main():
             for park in park_info:
                 print(park, "-", park_info[park], "reviews")
 
-        # op B
+            # show chart for op_a
+            reviews_per_park_chart(reviews)
+
+        # op_b
         elif option == "B":
 
             park = input("\nType the park name: ")
@@ -51,7 +60,10 @@ def main():
                 for country in location_info:
                     print(country, "-", location_info[country], "reviews")
 
-        # exit
+                # show chart for op_b
+                reviews_by_country_chart(reviews, park)
+
+        # ex
         elif option == "X":
 
             print("Program closed.")
@@ -63,5 +75,7 @@ def main():
 
 
 # run
-# march update
+# update april
+# update may
+# update june
 main()
