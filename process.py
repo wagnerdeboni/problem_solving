@@ -1,42 +1,54 @@
-import csv
-
-
-def read_reviews(file_name):
+def load_reviews(file_path):
     reviews = []
 
-    with open(file_name, "r", encoding="utf-8") as file:
-        reader = csv.DictReader(file)
+    file = open(file_path, "r", encoding="utf-8")
+    all_lines = file.readlines()
+    file.close()
 
-        for row in reader:
-            reviews.append(row)
+    for line in all_lines[1:]:
+        values = line.strip().split(",")
+
+        review = {
+            "Review_ID": int(values[0]),
+            "Rating": int(values[1]),
+            "Year_Month": values[2],
+            "Reviewer_Location": values[3],
+            "Branch": values[4]
+        }
+
+        reviews.append(review)
 
     return reviews
 
 
-def reviews_per_park(reviews):
-    parks = {}
+def get_review_count_per_park(reviews):
+    total_by_park = {}
 
     for review in reviews:
         park = review["Branch"]
 
-        if park in parks:
-            parks[park] += 1
+        if park not in total_by_park:
+            total_by_park[park] = 1
         else:
-            parks[park] = 1
+            total_by_park[park] += 1
 
-    return parks
+    return total_by_park
 
 
-def reviews_by_country(reviews, park_name):
-    countries = {}
+def count_reviews_by_location_for_park(reviews, park_name):
+    total_by_location = {}
+
+    park_name = park_name.strip().lower().replace(" ", "_")
 
     for review in reviews:
-        if review["Branch"].lower() == park_name.lower():
-            country = review["Reviewer_Location"]
+        current_park = review["Branch"].lower()
 
-            if country in countries:
-                countries[country] += 1
+        if current_park == park_name:
+            location = review["Reviewer_Location"]
+
+            if location not in total_by_location:
+                total_by_location[location] = 1
             else:
-                countries[country] = 1
+                total_by_location[location] += 1
 
-    return countries
+    return total_by_location
