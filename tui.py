@@ -29,9 +29,9 @@ def display_view_data_menu():
 def display_visualise_menu():
 
     print("\nPlease enter one of the following options:\n")
-    print("[A] Reviews per Park Chart")
-    print("[B] Top 10 Locations by Average Rating")
-    print("[C] Average Rating by Month Chart")
+    print("[A] Most reviewed Parks")
+    print("[B] Park Ranking by Nationality")
+    print("[C] Most Popular Month by Park")
     print("[X] Back")
 
 
