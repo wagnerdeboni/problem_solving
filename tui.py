@@ -20,7 +20,7 @@ def get_choice():
 
     choice = input("Select an option: ")
 
-    # Remove spaces and change to capital letters
+    # Remove spaces, change capital letters
     choice = choice.strip().upper()
 
     return choice
