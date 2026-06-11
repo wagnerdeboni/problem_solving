@@ -1,75 +1,88 @@
-import matplotlib.pyplot as plt
+from tui import display_title, display_menu, get_choice
+
+from process import (
+    read_reviews,
+    reviews_per_park,
+    reviews_by_country
+)
+
+from visual import (
+    reviews_per_park_chart,
+    reviews_by_country_chart
+)
 
 
-# reviews p park
-def reviews_per_park_chart(reviews):
+def main():
 
-    park_total = {}
+    # title
+    display_title()
 
-    for review in reviews:
+    # rev file
+    reviews = read_reviews("disneyland_reviews.csv")
 
-        park = review["Branch"]
+    print("\nData loaded successfully")
+    print("Number of reviews:", len(reviews))
 
-        if park not in park_total:
-            park_total[park] = 1
-        else:
-            park_total[park] += 1
+    while True:
 
-    parks = list(park_total.keys())
-    totals = list(park_total.values())
+        # menu
+        display_menu()
 
-    plt.bar(parks, totals)
+        # op user
+        option = get_choice()
 
-    plt.title("Reviews per Park")
-    plt.xlabel("Park")
-    plt.ylabel("Reviews")
+        # op A
+        if option == "A":
 
-    plt.show()
+            print("\nParks with most reviews:\n")
 
+            park_info = reviews_per_park(reviews)
 
-# reviews by country
-def reviews_by_country_chart(reviews, park_name):
+            for park in park_info:
+                print(park, "-", park_info[park], "reviews")
 
-    country_total = {}
+        # op B
+        elif option == "B":
 
-    park_name = park_name.lower()
+            park = input("\nType the park name: ")
 
-    for review in reviews:
+            location_info = reviews_by_country(reviews, park)
 
-        park = review["Branch"].lower()
+            if len(location_info) == 0:
+                print("No reviews found.")
 
-        if park == park_name:
-
-            country = review["Reviewer_Location"]
-
-            if country not in country_total:
-                country_total[country] = 1
             else:
-                country_total[country] += 1
+                print("\nReviews by country for", park)
 
-    countries = list(country_total.keys())
-    totals = list(country_total.values())
+                for country in location_info:
+                    print(country, "-", location_info[country], "reviews")
 
-    plt.bar(countries, totals)
+        # op C
+        elif option == "C":
 
-    plt.title("Reviews by Country")
-    plt.xlabel("Country")
-    plt.ylabel("Reviews")
+            reviews_per_park_chart(reviews)
 
-    plt.xticks(rotation=45)
+        # op D
+        elif option == "D":
 
-    plt.show()
-    # test data
+            park = input("\nType the park name: ")
+
+            reviews_by_country_chart(reviews, park)
+
+        # exit
+        elif option == "X":
+
+            print("Program closed.")
+            break
+
+        # invalid op
+        else:
+            print("Please enter a valid option.")
 
 
-reviews = [
-    {"Branch": "Disneyland_California"},
-    {"Branch": "Disneyland_California"},
-    {"Branch": "Disneyland_Paris"},
-    {"Branch": "Tokyo_Disneyland"}
-]
-
-reviews_per_park_chart(reviews)
-
+# run
+# march update
+# april update
 # may update
 # june update
+main()
