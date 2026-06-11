@@ -25,8 +25,26 @@ from visual import (
 
 from oop_exporter import ParkAnalyzer
 
-def main():
+def get_park_choice():
+    print("\nSelect a park:")
+    print("1 - Disneyland California")
+    print("2 - Disneyland Paris")
+    print("3 - Disneyland HongKong")
 
+    choice = input("Option: ")
+
+    if choice == "1":
+        return "Disneyland_California"
+    elif choice == "2":
+        return "Disneyland_Paris"
+    elif choice == "3":
+        return "Disneyland_HongKong"
+    else:
+        print("Invalid option.")
+        return None
+
+
+def main():
 
     # title
     display_title()
@@ -64,21 +82,9 @@ def main():
                 # op A
                 if sub_option == "A":
 
-                    print("\nSelect a park:")
-                    print("1 - Disneyland California")
-                    print("2 - Disneyland Paris")
-                    print("3 - Tokyo Disneyland")
+                    park = get_park_choice()
 
-                    choice = input("Option: ")
-
-                    if choice == "1":
-                        park = "Disneyland_California"
-                    elif choice == "2":
-                        park = "Disneyland_Paris"
-                    elif choice == "3":
-                        park = "Tokyo_Disneyland"
-                    else:
-                        print("Invalid option.")
+                    if park is None:
                         continue
 
                     park_reviews = reviews_for_park(reviews, park)
@@ -91,21 +97,9 @@ def main():
                 # op B
                 elif sub_option == "B":
 
-                    print("\nSelect a park:")
-                    print("1 - Disneyland California")
-                    print("2 - Disneyland Paris")
-                    print("3 - Tokyo Disneyland")
+                    park = get_park_choice()
 
-                    choice = input("Option: ")
-
-                    if choice == "1":
-                        park = "Disneyland_California"
-                    elif choice == "2":
-                        park = "Disneyland_Paris"
-                    elif choice == "3":
-                        park = "Tokyo_Disneyland"
-                    else:
-                        print("Invalid option.")
+                    if park is None:
                         continue
 
                     location = input("Enter reviewer location: ")
@@ -128,21 +122,9 @@ def main():
                 # op C
                 elif sub_option == "C":
 
-                    print("\nSelect a park:")
-                    print("1 - Disneyland California")
-                    print("2 - Disneyland Paris")
-                    print("3 - Tokyo Disneyland")
+                    park = get_park_choice()
 
-                    choice = input("Option: ")
-
-                    if choice == "1":
-                        park = "Disneyland_California"
-                    elif choice == "2":
-                        park = "Disneyland_Paris"
-                    elif choice == "3":
-                        park = "Tokyo_Disneyland"
-                    else:
-                        print("Invalid option.")
+                    if park is None:
                         continue
 
                     year = input("Enter year: ")
@@ -187,7 +169,7 @@ def main():
                 else:
                     print("Please enter a valid option.")
 
-        ## Visualise Data
+        # Visualise Data
         elif option == "B":
 
             while True:
@@ -196,29 +178,17 @@ def main():
 
                 sub_option = get_choice()
 
-                # chart A
+                # chart A - Most reviewed Parks
                 if sub_option == "A":
 
                     reviews_per_park_chart(reviews)
 
-                # chart B
+                # chart B - Park Ranking by Nationality
                 elif sub_option == "B":
 
-                    print("\nSelect a park:")
-                    print("1 - Disneyland California")
-                    print("2 - Disneyland Paris")
-                    print("3 - Tokyo Disneyland")
+                    park = get_park_choice()
 
-                    choice = input("Option: ")
-
-                    if choice == "1":
-                        park = "Disneyland_California"
-                    elif choice == "2":
-                        park = "Disneyland_Paris"
-                    elif choice == "3":
-                        park = "Tokyo_Disneyland"
-                    else:
-                        print("Invalid option.")
+                    if park is None:
                         continue
 
                     data = average_rating_by_location(
@@ -228,24 +198,12 @@ def main():
 
                     top_10_locations_chart(data)
 
-                # chart C
+                # chart C - Most Popular Month by Park
                 elif sub_option == "C":
 
-                    print("\nSelect a park:")
-                    print("1 - Disneyland California")
-                    print("2 - Disneyland Paris")
-                    print("3 - Tokyo Disneyland")
+                    park = get_park_choice()
 
-                    choice = input("Option: ")
-
-                    if choice == "1":
-                        park = "Disneyland_California"
-                    elif choice == "2":
-                        park = "Disneyland_Paris"
-                    elif choice == "3":
-                        park = "Tokyo_Disneyland"
-                    else:
-                        print("Invalid option.")
+                    if park is None:
                         continue
 
                     data = average_rating_by_month(
@@ -311,4 +269,3 @@ def main():
     # june update
 
 main()
-

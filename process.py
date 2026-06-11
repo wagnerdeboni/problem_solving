@@ -22,7 +22,6 @@ def read_reviews(file_path):
 
 
 def reviews_for_park(reviews, park_name):
-
     park_reviews = []
 
     park_name = park_name.strip().lower().replace(" ", "_")
@@ -39,7 +38,6 @@ def reviews_by_park_and_location(
         reviews,
         park_name,
         location_name):
-
     total_reviews = 0
 
     park_name = park_name.strip().lower().replace(" ", "_")
@@ -48,15 +46,15 @@ def reviews_by_park_and_location(
     for review in reviews:
 
         if (
-            review["Branch"].lower() == park_name
-            and review["Reviewer_Location"].lower() == location_name
+                review["Branch"].lower() == park_name
+                and review["Reviewer_Location"].lower() == location_name
         ):
             total_reviews += 1
 
     return total_reviews
 
-def average_score_by_year(reviews, park_name, year):
 
+def average_score_by_year(reviews, park_name, year):
     total_rating = 0
     review_count = 0
 
@@ -64,11 +62,15 @@ def average_score_by_year(reviews, park_name, year):
 
     for review in reviews:
 
+        # Skip rows with missing date
+        if "-" not in review["Year_Month"]:
+            continue
+
         review_year = review["Year_Month"][:4]
 
         if (
-            review["Branch"].lower() == park_name
-            and review_year == str(year)
+                review["Branch"].lower() == park_name
+                and review_year == str(year)
         ):
             total_rating += review["Rating"]
             review_count += 1
@@ -78,8 +80,8 @@ def average_score_by_year(reviews, park_name, year):
 
     return total_rating / review_count
 
-def average_rating_by_location(reviews, park_name):
 
+def average_rating_by_location(reviews, park_name):
     totals = {}
     counts = {}
 
@@ -105,8 +107,8 @@ def average_rating_by_location(reviews, park_name):
 
     return averages
 
-def average_rating_by_month(reviews, park_name):
 
+def average_rating_by_month(reviews, park_name):
     totals = {}
     counts = {}
 
@@ -116,7 +118,13 @@ def average_rating_by_month(reviews, park_name):
 
         if review["Branch"].lower() == park_name:
 
-            month = review["Year_Month"][5:7]
+            # Skip rows with missing date
+            if "-" not in review["Year_Month"]:
+                continue
+
+            # Pad single-digit months to 2 digits (e.g. '4' -> '04')
+            parts = review["Year_Month"].split("-")
+            month = parts[1].zfill(2)
 
             if month not in totals:
                 totals[month] = review["Rating"]
@@ -132,8 +140,8 @@ def average_rating_by_month(reviews, park_name):
 
     return averages
 
-def average_score_per_park_by_location(reviews):
 
+def average_score_per_park_by_location(reviews):
     parks = {}
 
     for review in reviews:
@@ -161,11 +169,10 @@ def average_score_per_park_by_location(reviews):
         results[park] = {}
 
         for location in parks[park]:
-
             average = (
-                parks[park][location]["total"]
-                /
-                parks[park][location]["count"]
+                    parks[park][location]["total"]
+                    /
+                    parks[park][location]["count"]
             )
 
             results[park][location] = round(
