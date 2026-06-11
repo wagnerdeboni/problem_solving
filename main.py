@@ -1,9 +1,9 @@
 from tui import (
-display_title,
-display_main_menu,
-display_view_data_menu,
-display_visualise_menu,
-get_choice
+        display_title,
+        display_main_menu,
+        display_view_data_menu,
+        display_visualise_menu,
+        get_choice
 )
 
 from process import (
@@ -25,6 +25,7 @@ from visual import (
 
 from oop_exporter import ParkAnalyzer
 
+
 def get_park_choice():
     print("\nSelect a park:")
     print("1 - Disneyland California")
@@ -45,7 +46,6 @@ def get_park_choice():
 
 
 def main():
-
     # title
     display_title()
 
@@ -257,15 +257,11 @@ def main():
         else:
             print("Please enter a valid option.")
 
-
     # run
-
     # march update
-
     # april update
-
     # may update
-
     # june update
+
 
 main()
