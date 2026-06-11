@@ -48,7 +48,22 @@ while True:
     # op B
     elif option == "B":
 
-        park = input("\nType the park name: ")
+        print("\nSelect a park:")
+        print("1 - Disneyland California")
+        print("2 - Disneyland Paris")
+        print("3 - Tokyo Disneyland")
+
+        choice = input("Option: ")
+
+        if choice == "1":
+            park = "Disneyland_California"
+        elif choice == "2":
+            park = "Disneyland_Paris"
+        elif choice == "3":
+            park = "Tokyo_Disneyland"
+        else:
+            print("Invalid option.")
+            continue
 
         location_info = reviews_by_country(reviews, park)
 
@@ -69,7 +84,22 @@ while True:
     # op D
     elif option == "D":
 
-        park = input("\nType the park name: ")
+        print("\nSelect a park:")
+        print("1 - Disneyland California")
+        print("2 - Disneyland Paris")
+        print("3 - Tokyo Disneyland")
+
+        choice = input("Option: ")
+
+        if choice == "1":
+            park = "Disneyland_California"
+        elif choice == "2":
+            park = "Disneyland_Paris"
+        elif choice == "3":
+            park = "Tokyo_Disneyland"
+        else:
+            print("Invalid option.")
+            continue
 
         reviews_by_country_chart(reviews, park)
 
