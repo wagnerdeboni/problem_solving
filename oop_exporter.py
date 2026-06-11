@@ -62,10 +62,29 @@ class ParkAnalyzer:
 
         for park in self.park_data:
             file.write("Park Name: " + str(park["ParkName"]) + "\n")
-            file.write("Number of Reviews: " + str(park["NumberOfReviews"]) + "\n")
-            file.write("Positive Reviews: " + str(park["NumberOfPositiveReviews"]) + "\n")
-            file.write("Average Score: " + str(park["AverageReviewScore"]) + "\n")
-            file.write("Unique Countries: " + str(park["NumberOfUniqueCountries"]) + "\n")
+            file.write(
+                "Number of Reviews: "
+                + str(park["NumberOfReviews"])
+                + "\n"
+            )
+
+            file.write(
+                "Positive Reviews: "
+                + str(park["NumberOfPositiveReviews"])
+                + "\n"
+            )
+
+            file.write(
+                "Average Score: "
+                + str(park["AverageReviewScore"])
+                + "\n"
+            )
+
+            file.write(
+                "Unique Countries: "
+                + str(park["NumberOfUniqueCountries"])
+                + "\n"
+            )
             file.write("----------------------\n")
 
         file.close()

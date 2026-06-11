@@ -1,15 +1,17 @@
 from tui import display_title, display_menu, get_choice
 
 from process import (
-read_reviews,
-reviews_per_park,
-reviews_by_country
-)
+    read_reviews,
+    reviews_per_park,
+    reviews_by_country
+    )
+
 
 from visual import (
-reviews_per_park_chart,
-reviews_by_country_chart
-)
+    reviews_per_park_chart,
+    reviews_by_country_chart
+    )
+
 
 def main():
 
@@ -17,7 +19,10 @@ def main():
     display_title()
 
 # rev file
+
+
 reviews = read_reviews("disneyland_reviews.csv")
+
 
 print("\nData loaded successfully")
 print("Number of reviews:", len(reviews))
@@ -88,5 +93,6 @@ while True:
 # may update
 
 # june update
+
 
 main()
