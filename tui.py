@@ -1,21 +1,38 @@
 def display_title():
 
-    text = "Disneyland Reviews System"
-    border = "*" * len(text)
+    title = "Disneyland Review Analyser"
 
-    print(border)
-    print(text)
-    print(border)
+    print("-" * len(title))
+    print(title)
+    print("-" * len(title))
 
 
-def display_menu():
+def display_main_menu():
 
-    print("\nMenu Options")
-    print("A - Show parks with most reviews")
-    print("B - Show reviews by country")
-    print("C - Show reviews per park chart")
-    print("D - Show reviews by country chart")
-    print("X - Close program")
+    print("\nPlease enter the letter which corresponds with your desired menu choice:\n")
+    print("[A] View Data")
+    print("[B] Visualise Data")
+    print("[C] Export Data")
+    print("[X] Exit")
+
+
+def display_view_data_menu():
+
+    print("\nPlease enter one of the following options:\n")
+    print("[A] View Reviews by Park")
+    print("[B] Number of Reviews by Park and Reviewer Location")
+    print("[C] Average Score per Year by Park")
+    print("[D] Average Score per Park by Reviewer Location")
+    print("[X] Back")
+
+
+def display_visualise_menu():
+
+    print("\nPlease enter one of the following options:\n")
+    print("[A] Reviews per Park Chart")
+    print("[B] Top 10 Locations by Average Rating")
+    print("[C] Average Rating by Month Chart")
+    print("[X] Back")
 
 
 def get_choice():

@@ -18,12 +18,13 @@ def reviews_per_park_chart(reviews):
     parks = list(park_total.keys())
     totals = list(park_total.values())
 
-    plt.bar(parks, totals)
+    plt.pie(
+        totals,
+        labels=parks,
+        autopct="%1.1f%%"
+    )
 
     plt.title("Reviews per Park")
-    plt.xlabel("Park")
-    plt.ylabel("Reviews")
-
     plt.show()
 
 
@@ -57,6 +58,60 @@ def reviews_by_country_chart(reviews, park_name):
     plt.ylabel("Reviews")
 
     plt.xticks(rotation=45)
+
+    plt.show()
+
+def top_10_locations_chart(data):
+
+    sorted_locations = sorted(
+        data.items(),
+        key=lambda x: x[1],
+        reverse=True
+    )
+
+    top10 = sorted_locations[:10]
+
+    locations = []
+    ratings = []
+
+    for location, rating in top10:
+        locations.append(location)
+        ratings.append(rating)
+
+    plt.figure(figsize=(10, 5))
+    plt.bar(locations, ratings)
+
+    plt.title("Top 10 Locations by Average Rating")
+    plt.xlabel("Location")
+    plt.ylabel("Average Rating")
+
+    plt.xticks(rotation=45)
+    plt.tight_layout()
+    plt.show()
+
+def average_rating_by_month_chart(data):
+
+    months_order = [
+        "01", "02", "03", "04",
+        "05", "06", "07", "08",
+        "09", "10", "11", "12"
+    ]
+
+    ratings = []
+
+    for month in months_order:
+
+        if month in data:
+            ratings.append(data[month])
+        else:
+            ratings.append(0)
+
+    plt.figure(figsize=(10, 5))
+    plt.bar(months_order, ratings)
+
+    plt.title("Average Rating by Month")
+    plt.xlabel("Month")
+    plt.ylabel("Average Rating")
 
     plt.show()
 

@@ -1,128 +1,314 @@
-from tui import display_title, display_menu, get_choice
+from tui import (
+display_title,
+display_main_menu,
+display_view_data_menu,
+display_visualise_menu,
+get_choice
+)
 
 from process import (
     read_reviews,
-    reviews_per_park,
-    reviews_by_country
-    )
-
+    reviews_for_park,
+    reviews_by_park_and_location,
+    average_score_by_year,
+    average_rating_by_location,
+    average_rating_by_month,
+    average_score_per_park_by_location
+)
 
 from visual import (
     reviews_per_park_chart,
-    reviews_by_country_chart
-    )
+    reviews_by_country_chart,
+    top_10_locations_chart,
+    average_rating_by_month_chart
+)
 
+from oop_exporter import ParkAnalyzer
 
 def main():
+
 
     # title
     display_title()
 
-# rev file
+    # rev file
+    reviews = read_reviews("disneyland_reviews.csv")
 
+    print("\nData loaded successfully")
+    print("Number of reviews:", len(reviews))
 
-reviews = read_reviews("disneyland_reviews.csv")
+    while True:
 
+        display_main_menu()
 
-print("\nData loaded successfully")
-print("Number of reviews:", len(reviews))
+        option = get_choice()
 
-while True:
+        if option == "A":
+            print("\nYou have chosen option A - View Data")
 
-    # menu
-    display_menu()
+        elif option == "B":
+            print("\nYou have chosen option B - Visualise Data")
 
-    # op user
-    option = get_choice()
+        elif option == "X":
+            print("\nYou have chosen option X - Exit")
 
-    # op A
-    if option == "A":
+        # View Data
+        if option == "A":
 
-        print("\nParks with most reviews:\n")
+            while True:
 
-        park_info = reviews_per_park(reviews)
+                display_view_data_menu()
 
-        for park in park_info:
-            print(park, "-", park_info[park], "reviews")
+                sub_option = get_choice()
 
-    # op B
-    elif option == "B":
+                # op A
+                if sub_option == "A":
 
-        print("\nSelect a park:")
-        print("1 - Disneyland California")
-        print("2 - Disneyland Paris")
-        print("3 - Tokyo Disneyland")
+                    print("\nSelect a park:")
+                    print("1 - Disneyland California")
+                    print("2 - Disneyland Paris")
+                    print("3 - Tokyo Disneyland")
 
-        choice = input("Option: ")
+                    choice = input("Option: ")
 
-        if choice == "1":
-            park = "Disneyland_California"
-        elif choice == "2":
-            park = "Disneyland_Paris"
-        elif choice == "3":
-            park = "Tokyo_Disneyland"
+                    if choice == "1":
+                        park = "Disneyland_California"
+                    elif choice == "2":
+                        park = "Disneyland_Paris"
+                    elif choice == "3":
+                        park = "Tokyo_Disneyland"
+                    else:
+                        print("Invalid option.")
+                        continue
+
+                    park_reviews = reviews_for_park(reviews, park)
+
+                    print("\nReviews for", park, "\n")
+
+                    for review in park_reviews:
+                        print(review)
+
+                # op B
+                elif sub_option == "B":
+
+                    print("\nSelect a park:")
+                    print("1 - Disneyland California")
+                    print("2 - Disneyland Paris")
+                    print("3 - Tokyo Disneyland")
+
+                    choice = input("Option: ")
+
+                    if choice == "1":
+                        park = "Disneyland_California"
+                    elif choice == "2":
+                        park = "Disneyland_Paris"
+                    elif choice == "3":
+                        park = "Tokyo_Disneyland"
+                    else:
+                        print("Invalid option.")
+                        continue
+
+                    location = input("Enter reviewer location: ")
+
+                    total_reviews = reviews_by_park_and_location(
+                        reviews,
+                        park,
+                        location
+                    )
+
+                    print(
+                        "\nNumber of reviews from",
+                        location,
+                        "for",
+                        park,
+                        "=",
+                        total_reviews
+                    )
+
+                # op C
+                elif sub_option == "C":
+
+                    print("\nSelect a park:")
+                    print("1 - Disneyland California")
+                    print("2 - Disneyland Paris")
+                    print("3 - Tokyo Disneyland")
+
+                    choice = input("Option: ")
+
+                    if choice == "1":
+                        park = "Disneyland_California"
+                    elif choice == "2":
+                        park = "Disneyland_Paris"
+                    elif choice == "3":
+                        park = "Tokyo_Disneyland"
+                    else:
+                        print("Invalid option.")
+                        continue
+
+                    year = input("Enter year: ")
+
+                    average = average_score_by_year(
+                        reviews,
+                        park,
+                        year
+                    )
+
+                    print(
+                        "\nAverage rating for",
+                        park,
+                        "in",
+                        year,
+                        "=",
+                        round(average, 2)
+                    )
+
+                # op D
+                elif sub_option == "D":
+
+                    results = average_score_per_park_by_location(
+                        reviews
+                    )
+
+                    for park in results:
+
+                        print("\n" + park)
+
+                        for location in results[park]:
+                            print(
+                                location,
+                                "-",
+                                results[park][location]
+                            )
+
+                # back
+                elif sub_option == "X":
+                    break
+
+                else:
+                    print("Please enter a valid option.")
+
+        ## Visualise Data
+        elif option == "B":
+
+            while True:
+
+                display_visualise_menu()
+
+                sub_option = get_choice()
+
+                # chart A
+                if sub_option == "A":
+
+                    reviews_per_park_chart(reviews)
+
+                # chart B
+                elif sub_option == "B":
+
+                    print("\nSelect a park:")
+                    print("1 - Disneyland California")
+                    print("2 - Disneyland Paris")
+                    print("3 - Tokyo Disneyland")
+
+                    choice = input("Option: ")
+
+                    if choice == "1":
+                        park = "Disneyland_California"
+                    elif choice == "2":
+                        park = "Disneyland_Paris"
+                    elif choice == "3":
+                        park = "Tokyo_Disneyland"
+                    else:
+                        print("Invalid option.")
+                        continue
+
+                    data = average_rating_by_location(
+                        reviews,
+                        park
+                    )
+
+                    top_10_locations_chart(data)
+
+                # chart C
+                elif sub_option == "C":
+
+                    print("\nSelect a park:")
+                    print("1 - Disneyland California")
+                    print("2 - Disneyland Paris")
+                    print("3 - Tokyo Disneyland")
+
+                    choice = input("Option: ")
+
+                    if choice == "1":
+                        park = "Disneyland_California"
+                    elif choice == "2":
+                        park = "Disneyland_Paris"
+                    elif choice == "3":
+                        park = "Tokyo_Disneyland"
+                    else:
+                        print("Invalid option.")
+                        continue
+
+                    data = average_rating_by_month(
+                        reviews,
+                        park
+                    )
+
+                    average_rating_by_month_chart(data)
+
+                # back
+                elif sub_option == "X":
+                    break
+
+                else:
+                    print("Please enter a valid option.")
+
+        # Export Data
+        elif option == "C":
+
+            analyzer = ParkAnalyzer(reviews)
+
+            print("\nChoose export format:")
+            print("1 - TXT")
+            print("2 - CSV")
+            print("3 - JSON")
+
+            export_choice = input("Option: ")
+
+            if export_choice == "1":
+                analyzer.export_to_txt("park_report")
+                print("TXT file exported.")
+
+            elif export_choice == "2":
+                analyzer.export_to_csv("park_report")
+                print("CSV file exported.")
+
+            elif export_choice == "3":
+                analyzer.export_to_json("park_report")
+                print("JSON file exported.")
+
+            else:
+                print("Invalid option.")
+
+        # exit
+        elif option == "X":
+
+            print("Program closed.")
+            break
+
+        # invalid op
         else:
-            print("Invalid option.")
-            continue
-
-        location_info = reviews_by_country(reviews, park)
-
-        if len(location_info) == 0:
-            print("No reviews found.")
-
-        else:
-            print("\nReviews by country for", park)
-
-            for country in location_info:
-                print(country, "-", location_info[country], "reviews")
-
-    # op C
-    elif option == "C":
-
-        reviews_per_park_chart(reviews)
-
-    # op D
-    elif option == "D":
-
-        print("\nSelect a park:")
-        print("1 - Disneyland California")
-        print("2 - Disneyland Paris")
-        print("3 - Tokyo Disneyland")
-
-        choice = input("Option: ")
-
-        if choice == "1":
-            park = "Disneyland_California"
-        elif choice == "2":
-            park = "Disneyland_Paris"
-        elif choice == "3":
-            park = "Tokyo_Disneyland"
-        else:
-            print("Invalid option.")
-            continue
-
-        reviews_by_country_chart(reviews, park)
-
-    # exit
-    elif option == "X":
-
-        print("Program closed.")
-        break
-
-    # invalid op
-    else:
-        print("Please enter a valid option.")
+            print("Please enter a valid option.")
 
 
-# run
+    # run
 
-# march update
+    # march update
 
-# april update
+    # april update
 
-# may update
+    # may update
 
-# june update
-
+    # june update
 
 main()
+
