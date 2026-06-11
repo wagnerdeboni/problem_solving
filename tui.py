@@ -13,6 +13,8 @@ def display_menu():
     print("\nMenu Options")
     print("A - Show parks with most reviews")
     print("B - Show reviews by country")
+    print("C - Show reviews per park chart")
+    print("D - Show reviews by country chart")
     print("X - Close program")
 
 
@@ -24,6 +26,8 @@ def get_choice():
     choice = choice.strip().upper()
 
     return choice
+
+
 # april update
 # may upadte
 # june update
