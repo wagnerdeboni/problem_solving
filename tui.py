@@ -9,7 +9,7 @@ def display_title():
 
 def display_main_menu():
 
-    print("\nPlease enter the letter which corresponds with your desired menu choice:\n")
+    print("\nPlease enter the letter for your desired menu choice:\n")
     print("[A] View Data")
     print("[B] Visualise Data")
     print("[C] Export Data")

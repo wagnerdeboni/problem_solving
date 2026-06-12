@@ -61,6 +61,7 @@ def reviews_by_country_chart(reviews, park_name):
 
     plt.show()
 
+
 def top_10_locations_chart(data):
 
     sorted_locations = sorted(
@@ -88,6 +89,7 @@ def top_10_locations_chart(data):
     plt.xticks(rotation=45)
     plt.tight_layout()
     plt.show()
+
 
 def average_rating_by_month_chart(data):
 
